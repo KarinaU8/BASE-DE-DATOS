@@ -1,0 +1,101 @@
+
+erDiagram
+  categorias ||--o{ productos : "contiene"
+  proveedores ||--o{ productos : "suministra"
+  compras ||--o{ detalle_compras : "tiene"
+  productos ||--o{ detalle_compras : "incluye"
+  ventas ||--o{ detalle_ventas : "tiene"
+  productos ||--o{ detalle_ventas : "incluye"
+  productos ||--o{ kardex : "movimientos"
+
+  categorias {
+    int id PK
+    varchar nombre
+    varchar descripcion
+  }
+
+  proveedores {
+    int id PK
+    varchar razon_social
+    varchar ruc
+    varchar telefono
+    varchar email
+    varchar direccion
+  }
+
+  productos {
+    int id PK
+    varchar nombre
+    varchar sku
+    int id_categoria FK
+    int id_proveedor FK
+    decimal precio_compra
+    decimal precio_venta
+    int stock
+    varchar unidad
+    tinyint activo
+  }
+
+  clientes {
+    int id PK
+    varchar nombre
+    varchar doc
+    varchar telefono
+    varchar email
+    varchar direccion
+  }
+
+  empleados {
+    int id PK
+    varchar nombre
+    varchar dni
+    varchar cargo
+    varchar telefono
+    varchar email
+  }
+
+  compras {
+    int id PK
+    datetime fecha
+    int id_proveedor FK
+    decimal total
+    varchar observacion
+  }
+
+  detalle_compras {
+    int id PK
+    int id_compra FK
+    int id_producto FK
+    int cantidad
+    decimal precio_unit
+    decimal subtotal
+  }
+
+  ventas {
+    int id PK
+    datetime fecha
+    int id_cliente FK
+    int id_empleado FK
+    decimal total
+    varchar metodo_pago
+    varchar observacion
+  }
+
+  detalle_ventas {
+    int id PK
+    int id_venta FK
+    int id_producto FK
+    int cantidad
+    decimal precio_unit
+    decimal descuento
+    decimal subtotal
+  }
+
+  kardex {
+    int id PK
+    datetime fecha
+    int id_producto FK
+    enum tipo
+    int cantidad
+    varchar referencia
+  }

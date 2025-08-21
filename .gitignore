@@ -1,0 +1,15 @@
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editors
+.vscode/
+.idea/
+
+# SQL dumps
+dump*.sql
+*.dump
